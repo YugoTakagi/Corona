@@ -4,7 +4,6 @@
 
 #include "../inc/define.hpp"
 
-float StateForce();
 bool Check(MemoClient& clie, const char* flag);
 
 int main(int argc, char const *argv[])
@@ -44,10 +43,13 @@ int main(int argc, char const *argv[])
     // main loop
 
         reff = ref1[index];
-        mesf = StateForce();
 
         std::cout <<"["<< index <<"] ";
-        LogOfvasInt.Record(index, reff, mesf, vasInt.Stretch(reff, mesf));
+        LogOfvasInt.Record
+        (
+            index,
+            vasInt.Stretch(reff)
+        );
 
     // ~main loop
         ++index;
@@ -62,16 +64,6 @@ int main(int argc, char const *argv[])
 /* ============================================================== */
     std::cout << "[Client] That's it." << std::endl;
     return 0;
-}
-
-float StateForce()
-{
-    float stForce = 0.0;
-    // run code
-
-
-    // ~run code
-    return stForce;
 }
 
 bool Check(MemoClient& clie, const char* flag)

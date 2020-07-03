@@ -1,20 +1,33 @@
 #include "../inc/muscle.hpp"
 
-Muscle::Muscle(const float dt, const float p_gain, const float i_gain, const float d_gain)
+Muscle::Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain)
 :_pid(dt)
 {
-    _pid.SetGain(p_gain, i_gain, d_gain);
-    _force = 0.0;
+    _pid.SetGain(pGain, iGain, dGain);
+    _force = new float[3];
 }
 
 Muscle::~Muscle()
 {
+    delete[] _force;
 }
 
-float Muscle::Stretch(float ref, float state)
+float* Muscle::Stretch(c_float ref)
 {
-    _force = _pid.run(ref, state);
-    _motor.SetVelocity(_force);
+    _force[0] = ref;
+    _force[1] = MeasureForce();
+    _force[2] = _pid.run(_force[0], _force[1]);
+    _motor.SetVelocity(_force[2]);
     return _force;
+}
+
+float Muscle::MeasureForce()
+{
+    _measuredForce = 0.0;
+    // run code
+
+
+    // ~run code
+    return _measuredForce;
 }
 
