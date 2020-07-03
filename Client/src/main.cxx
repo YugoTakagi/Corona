@@ -2,20 +2,7 @@
 #include "../inc/tcpClient.hpp"
 #include "../inc/muscle.hpp"
 
-#define IFILE1 "../_input/vas_int_r.csv"
-#define IFILE2 "../_input/vas_int_r.csv"
-#define IFILE3 "../_input/vas_int_r.csv"
-
-#define OFILE1 "../_output/log.csv"
-
-#define START "start"
-#define END   "end.."
-#define READY "ready"
-
-#define DT    0.02//[s]
-#define PGAIN 2
-#define IGAIN 0.01
-#define DGAIN 1
+#include "../inc/define.hpp"
 
 float StateForce();
 bool Check(MemoClient& clie, const char* flag);
@@ -24,7 +11,6 @@ int main(int argc, char const *argv[])
 {
 /* ============================================================== */
 // Init
-    // array for pid & log.
     const float ref1[]= 
     {
         #include IFILE1
@@ -33,6 +19,7 @@ int main(int argc, char const *argv[])
 
     Muscle vasInt(DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
+    LogOfvasInt.RecordPidGain(PGAIN, IGAIN, DGAIN);
 // ~Inti 
 /* ============================================================== */
 // Get permission from Server

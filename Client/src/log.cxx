@@ -6,15 +6,27 @@ Log::Log(const int size)
     _refForce = new float[size];
     _measuredForce = new float[size];
     _calculatedForce = new float[size];
+
+    _pidGain = new float[3];
 }
 
 Log::~Log()
 {
+    delete[] _refForce;
     delete[] _measuredForce;
     delete[] _calculatedForce;
+
+    delete[] _pidGain;
 }
 
-void Log::Record(int index, const float reff, const float mesf, const float calcf)
+void Log::RecordPidGain(c_float pGain, c_float iGain, c_float dGain)
+{
+    _pidGain[0] = pGain;
+    _pidGain[1] = iGain;
+    _pidGain[2] = dGain;
+}
+
+void Log::Record(int index, c_float reff, c_float mesf, c_float calcf)
 {
     _refForce[index] = reff;
     _measuredForce[index] = mesf;
@@ -24,6 +36,9 @@ void Log::Record(int index, const float reff, const float mesf, const float calc
 void Log::Save(const char* filepath)
 {
     std::ofstream ofs(filepath);
+    ofs << "pGain, " << _pidGain[0] << std::endl;
+    ofs << "iGain, " << _pidGain[1] << std::endl;
+    ofs << "dGain, " << _pidGain[2] << std::endl;
     ofs << "ref,adj,state" << std::endl;
     for(int i=0; i < _size; ++i)
     {
