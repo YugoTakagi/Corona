@@ -4,18 +4,31 @@
 #include "pid.hpp"
 #include "virtualMotor.hpp"
 
+typedef const float c_float;
+
+// PIDコントローラにより筋張力[N]を算出し, モータを制御します.
+// Example:
+//      Muscle vasInt(dt, pGain, iGain, dGain);
+//      for(float reff : reffs)
+//      {
+//          vasInt.Stretch(reff, mesf)
+//      }    
 class Muscle
 {
 private:
     PidControler _pid;
     VirtualMotor _motor;
     
-    float _force;
+    float* _force;
+    float _measuredForce;
+    float* _gain;
 public:
-    Muscle(const float dt, const float p_gain, const float i_gain, const float d_gain);
+    Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain);
     ~Muscle();
 
-    float Stretch(float ref, float state);
+    float* Stretch(c_float ref);
+    float MeasureForce();
+    float* ReakGain();
 };
 
 #endif//MUSCLE
