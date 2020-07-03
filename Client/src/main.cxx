@@ -4,21 +4,22 @@
 
 #include "../inc/define.hpp"
 
+
 bool Check(MemoClient& clie, const char* flag);
+
 
 int main(int argc, char const *argv[])
 {
 /* ============================================================== */
 // Init
-    const float ref1[]= 
+    const float ref1[] = 
     {
         #include IFILE1
     };
-    const int size = sizeof(ref1) / sizeof(float);
+    const int size = sizeof(ref1) / sizeof(const float);
 
     Muscle vasInt(DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
-    LogOfvasInt.RecordPidGain(PGAIN, IGAIN, DGAIN);
 // ~Inti 
 /* ============================================================== */
 // Get permission from Server
@@ -34,13 +35,14 @@ int main(int argc, char const *argv[])
 // ~Get permission from Server
 /* ============================================================== */
 // Start muscle control
-    float reff = 0.0;
-    float mesf = 0.0;
-    int index = 0;
+    float reff  = 0.0;
+    float mesf  = 0.0;
+    int   index = 0;
     while(startFlag)
     {
         if(index == size) break;
     // main loop
+
 
         reff = ref1[index];
 
@@ -51,6 +53,7 @@ int main(int argc, char const *argv[])
             vasInt.Stretch(reff)
         );
 
+
     // ~main loop
         ++index;
     }
@@ -58,9 +61,10 @@ int main(int argc, char const *argv[])
     Check(client, END);
 // ~Start muscle control
 /* ============================================================== */
-// Make log
+// Save log
+    LogOfvasInt.RecordPidGain(vasInt.ReakGain());
     LogOfvasInt.Save(OFILE1);
-// ~Make log
+// ~Save log
 /* ============================================================== */
     std::cout << "[Client] That's it." << std::endl;
     return 0;

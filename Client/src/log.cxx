@@ -19,11 +19,11 @@ Log::~Log()
     delete[] _pidGain;
 }
 
-void Log::RecordPidGain(c_float pGain, c_float iGain, c_float dGain)
+void Log::RecordPidGain(c_float* gain)
 {
-    _pidGain[0] = pGain;
-    _pidGain[1] = iGain;
-    _pidGain[2] = dGain;
+    _pidGain[0] = gain[0];
+    _pidGain[1] = gain[1];
+    _pidGain[2] = gain[2];
 }
 
 void Log::Record(int index, c_float force[3])

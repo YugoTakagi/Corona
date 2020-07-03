@@ -19,7 +19,7 @@ private:
 public:
     Log(const int size);
     ~Log();
-    void RecordPidGain(c_float pGain, c_float iGain, c_float dGain);
+    void RecordPidGain(c_float* gain);
     void Record(int index,c_float force[3]);
     void Save(const char* filepath);
 };

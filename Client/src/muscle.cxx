@@ -5,11 +5,17 @@ Muscle::Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain)
 {
     _pid.SetGain(pGain, iGain, dGain);
     _force = new float[3];
+    _gain  = new float[3];
+
+    _gain[0] = pGain;
+    _gain[1] = iGain;
+    _gain[2] = dGain;
 }
 
 Muscle::~Muscle()
 {
     delete[] _force;
+    delete[] _gain;
 }
 
 float* Muscle::Stretch(c_float ref)
@@ -31,3 +37,7 @@ float Muscle::MeasureForce()
     return _measuredForce;
 }
 
+float* Muscle::ReakGain()
+{
+    return _gain;
+}
