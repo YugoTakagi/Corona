@@ -24,7 +24,8 @@ void PidControler::SetGain(float p_gain, float i_gain, float d_gain)
     _gainCeck = true;
 }
 
-float PidControler::run(float ref, float state){
+float PidControler::run(float ref, float state)
+{
     if(_gainCeck){
         _diff[0] = _diff[1];
         _diff[1] = ref - state;
@@ -35,5 +36,6 @@ float PidControler::run(float ref, float state){
     }
     else{
         std::cout << "Please gain set." << std::endl;
+        exit(1);
     }
 }

@@ -12,15 +12,15 @@ class Log
 private:
     float* _measuredForce;
     float* _calculatedForce;
-    float* _refForce;
-    int _size;
-
+    float* _referencedForce;
     float* _pidGain;
+
+    int    _size;
 public:
     Log(const int size);
     ~Log();
-    void RecordPidGain(c_float* gain);
-    void Record(int index,c_float force[3]);
+    void RecordPidGain(float* gain, size_t size);
+    void Record(int index, c_float force[3]);
     void Save(const char* filepath);
 };
 

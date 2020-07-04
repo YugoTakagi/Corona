@@ -41,7 +41,7 @@ bool Check(MemoServer& serv, const char* flag)
         // std::cout << "[Server] Recv ["<< recvBuffer <<"] from Client."<< std::endl;
         if(!strcmp(recvBuffer, flag))
         {
-            std::cout << "[Server] I'm "<< recvBuffer << "." << std::endl;
+            std::cout << "[Client] I'm "<< recvBuffer << "." << std::endl;
             return true;
             break;
         }

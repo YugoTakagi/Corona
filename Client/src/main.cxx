@@ -1,26 +1,25 @@
 #include "../inc/log.hpp"
 #include "../inc/tcpClient.hpp"
-#include "../inc/muscle.hpp"
+#include <muscle.hpp>
 
 #include "../inc/define.hpp"
 
+typedef const float c_float;
 
 bool Check(MemoClient& clie, const char* flag);
-
 
 int main(int argc, char const *argv[])
 {
 /* ============================================================== */
 // Init
-    const float ref1[] = 
-    {
+    c_float ref_table[] = {
         #include IFILE1
     };
-    const int size = sizeof(ref1) / sizeof(const float);
+    const int size = sizeof(ref_table) / sizeof(const float);
 
     Muscle vasInt(DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
-// ~Inti 
+// ~Inti
 /* ============================================================== */
 // Get permission from Server
     unsigned short port = atoi(argv[1]); // 8100
@@ -44,13 +43,11 @@ int main(int argc, char const *argv[])
     // main loop
 
 
-        reff = ref1[index];
-
         std::cout <<"["<< index <<"] ";
         LogOfvasInt.Record
         (
             index,
-            vasInt.Stretch(reff)
+            vasInt.Stretch(ref_table[index])
         );
 
 
@@ -62,11 +59,13 @@ int main(int argc, char const *argv[])
 // ~Start muscle control
 /* ============================================================== */
 // Save log
-    LogOfvasInt.RecordPidGain(vasInt.ReakGain());
+    float gainBuffer[3] = {};
+    vasInt.GetGain(gainBuffer, sizeof(gainBuffer));
+    LogOfvasInt.RecordPidGain(gainBuffer, sizeof(gainBuffer));
     LogOfvasInt.Save(OFILE1);
 // ~Save log
 /* ============================================================== */
-    std::cout << "[Client] That's it." << std::endl;
+    std::cout << "[Client] That's it. See you." << std::endl;
     return 0;
 }
 
@@ -74,7 +73,7 @@ bool Check(MemoClient& clie, const char* flag)
 {
     while(true)
     {
-        char* recvBuffer = clie.Read();
+        char* recvBuffer = clie.Recv();
         if(!strcmp(recvBuffer, flag))
         {
             std::cout << "[Server] I'm "<< recvBuffer << "." << std::endl;

@@ -7,23 +7,34 @@
 #include <iostream>
 
 #define QUEUELIMIT 5
-#define MSGSIZE 5
-#define BUFSIZE 5
+#define BUFSIZE    5
+
+typedef const char     c_char;
+typedef unsigned short u_short;
 
 class MemoClient
 {
 private:
-    int sock;                          // local socket descriptor
-    struct sockaddr_in servSockAddr;   // server internet socket address
-    unsigned short servPort;           // server port number
-    int recvMsgSize, sendMsgSize;      // recieve and send buffer size
-    char recvBuffer[BUFSIZE];          // receive temporary buffer
-    // char sendBuffer[BUFSIZE];          // send temporary buffer
-public:
-    MemoClient(unsigned short port, const char* ip_addres);
-    ~MemoClient();
+    const u_short       _port;
+    c_char*             _ip_addres;
 
-    void Send(const char text[5]);
-    char* Read();
-    char* OfRecvBuffer();
+
+    int                 _sock;           // local socket descriptor
+    struct sockaddr_in  _servSockAddr;   // server internet socket address
+    u_short             _servPort;       // server port number
+    char*               _recvBuffer;     // receive temporary buffer
+    char*               _sendBuffer;     // send temporary buffer
+    int                 _recvMsgSize;    // recieve buffer size
+    int                 _sendMsgSize;    // send buffer size
+
+    void WriteSockaddr_in(c_char* ip_addres);
+    void WritePort(const u_short port);
+    void MakeSocket(void);
+    void Connect(void);
+public:
+    MemoClient(const u_short port, c_char* ip_addres);
+    ~MemoClient(void);
+
+    void  Send(c_char* text);
+    char* Recv(void);
 };
