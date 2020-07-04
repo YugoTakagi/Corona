@@ -4,14 +4,14 @@ project(muscle_lib
     DESCRIPTION "muscle lib"
     LANGUAGES CXX)
 
-set(INCLUDE "inc")
+#set(INCLUDE "./inc")
 
 file(GLOB SOURCE_FILES "src/*.cxx" "src/*.cpp" "src/*.c")
 set(SOURCE ${SOURCE_FILES})
 add_library(muscle STATIC ${SOURCE})
 
 target_compile_features(muscle PRIVATE cxx_std_11) #ビルドプロパティの指定
-target_include_directories(muscle INTERFACE INCLUDE)
+target_include_directories(muscle INTERFACE ./inc)
 set_target_properties(muscle
     PROPERTIES
     VERSION ${PROJECT_VERSION})

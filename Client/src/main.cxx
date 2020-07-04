@@ -1,6 +1,6 @@
 #include "../inc/log.hpp"
 #include "../inc/tcpClient.hpp"
-#include "../inc/muscle.hpp"
+#include <muscle.hpp>
 
 #include "../inc/define.hpp"
 
