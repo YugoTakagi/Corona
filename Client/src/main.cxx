@@ -34,8 +34,6 @@ int main(int argc, char const *argv[])
 // ~Get permission from Server
 /* ============================================================== */
 // Start muscle control
-    float reff  = 0.0;
-    float mesf  = 0.0;
     int   index = 0;
     while(startFlag)
     {
