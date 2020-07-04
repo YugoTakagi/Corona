@@ -2,28 +2,27 @@
 
 Muscle::Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain)
 :_pid(dt)
+,_pGain(pGain)
+,_iGain(iGain)
+,_dGain(dGain)
 {
     _pid.SetGain(pGain, iGain, dGain);
     _force = new float[3];
-    _gain  = new float[3];
-
-    _gain[0] = pGain;
-    _gain[1] = iGain;
-    _gain[2] = dGain;
 }
 
 Muscle::~Muscle()
 {
     delete[] _force;
-    delete[] _gain;
 }
 
-float* Muscle::Stretch(c_float ref)
+float* Muscle::Stretch(c_float &ref)
 {
-    _force[0] = ref;
-    _force[1] = MeasureForce();
-    _force[2] = _pid.run(_force[0], _force[1]);
-    _motor.SetVelocity(_force[2]);
+    _force[ASREF] = ref;
+    _force[ASMES] = MeasureForce();
+
+    _force[ASCAL] = _pid.run(_force[ASREF], _force[ASMES]);
+
+    _motor.SetVelocity(_force[ASCAL]);
     return _force;
 }
 
@@ -37,7 +36,9 @@ float Muscle::MeasureForce()
     return _measuredForce;
 }
 
-float* Muscle::ReakGain()
-{
-    return _gain;
+void Muscle::GetGain(float buff[3]) const
+{   
+    buff[P] = _pGain;
+    buff[I] = _iGain;
+    buff[D] = _dGain;
 }
