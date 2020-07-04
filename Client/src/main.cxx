@@ -8,7 +8,6 @@ typedef const float c_float;
 
 bool Check(MemoClient& clie, const char* flag);
 
-
 int main(int argc, char const *argv[])
 {
 /* ============================================================== */
@@ -62,11 +61,11 @@ int main(int argc, char const *argv[])
 // Save log
     float gainBuffer[3] = {};
     vasInt.GetGain(gainBuffer, sizeof(gainBuffer));
-    LogOfvasInt.RecordPidGain(gainBuffer);
+    LogOfvasInt.RecordPidGain(gainBuffer, sizeof(gainBuffer));
     LogOfvasInt.Save(OFILE1);
 // ~Save log
 /* ============================================================== */
-    std::cout << "[Client] That's it." << std::endl;
+    std::cout << "[Client] That's it. See you." << std::endl;
     return 0;
 }
 

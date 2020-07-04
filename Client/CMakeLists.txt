@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(XXX CXX)
+
+add_subdirectory(./muscle)
+
 set(OUT "main")
 set(INCLUDE "inc")
 
@@ -9,3 +12,4 @@ set(SOURCE ${SOURCE_FILES})
 
 # 実行ファイルの作成を指示する
 add_executable(${OUT} ${SOURCE})
+target_link_libraries(${OUT} muscle)
