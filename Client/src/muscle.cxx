@@ -36,8 +36,13 @@ float Muscle::MeasureForce()
     return _measuredForce;
 }
 
-void Muscle::GetGain(float buff[3]) const
+void Muscle::GetGain(float *buff, size_t size) const
 {   
+    if (( size/sizeof(float) ) != 3)
+    {
+        exit(0);
+    }
+    
     buff[P] = _pGain;
     buff[I] = _iGain;
     buff[D] = _dGain;

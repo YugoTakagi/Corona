@@ -27,19 +27,19 @@ private:
     PidControler _pid;
     VirtualMotor _motor;
 
-    c_float _pGain;
-    c_float _iGain;
-    c_float _dGain;
+    c_float      _pGain;
+    c_float      _iGain;
+    c_float      _dGain;
 
-    float* _force;
-    float _measuredForce;
+    float*       _force;
+    float        _measuredForce;
 public:
     Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain);
     ~Muscle();
 
     float* Stretch(c_float &ref);
-    float MeasureForce();
-    void GetGain(float buff[3]) const;
+    float  MeasureForce();
+    void   GetGain(float *buff, size_t size) const;
 };
 
 #endif//MUSCLE
