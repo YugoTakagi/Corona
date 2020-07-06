@@ -4,7 +4,7 @@
 #define END   "end.."
 #define READY "ready"
 
-bool Check(MemoServer& serv, const char* flag);
+bool CheckRecv(MemoServer& serv, const char* flag);
 int main(void)
 {
     std::cout << "[Server] Hi! Let's start!" << std::endl;
@@ -15,13 +15,13 @@ int main(void)
     MemoServer serv1(port[0]);
     // MemoServer serv2;
 
-    Check(serv1, READY);
+    CheckRecv(serv1, READY);
     // Check(serv2, READY);
 
     serv1.Send(START);
     // serv2.Send(START);
 
-    if(Check(serv1, END)) serv1.Send(END);
+    if(CheckRecv(serv1, END)) serv1.Send(END);
     // if(Check(serv2, END)) serv2.Send(END);
 
     std::cout << "[Server] That's it." << std::endl;
@@ -29,7 +29,7 @@ int main(void)
     return 0;
 }
 
-bool Check(MemoServer& serv, const char* flag)
+bool CheckRecv(MemoServer& serv, const char* flag)
 {
     while(true)
     {// Recv ReadFlag from Client.
