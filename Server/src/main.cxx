@@ -12,11 +12,8 @@ int main(void)
     // unsigned short port[] = {8100, 8200};
     // int size = sizeof(port) / sizeof(unsigned short);
 
-    MemoServer serv1;
+    MemoServer serv1(port[0]);
     // MemoServer serv2;
-
-    serv1.SetPort(port[0]);
-    // serv2.SetPort(port[1]);
 
     Check(serv1, READY);
     // Check(serv2, READY);
@@ -36,8 +33,8 @@ bool Check(MemoServer& serv, const char* flag)
 {
     while(true)
     {// Recv ReadFlag from Client.
-        serv.Read();
-        char* recvBuffer = serv.OfRecvBuffer();
+        
+        char* recvBuffer = serv.Recv();
         // std::cout << "[Server] Recv ["<< recvBuffer <<"] from Client."<< std::endl;
         if(!strcmp(recvBuffer, flag))
         {

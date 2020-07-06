@@ -15,7 +15,7 @@ MemoClient::MemoClient(const u_short port, c_char* ip_addres)
 MemoClient::~MemoClient(void)
 {
     close(_sock);
-    std::cout << "close _sock." << std::endl;
+    // std::cout << "close _sock." << std::endl;
 
     delete[] _recvBuffer;
     delete[] _sendBuffer;

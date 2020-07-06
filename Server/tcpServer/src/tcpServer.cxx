@@ -1,88 +1,84 @@
 #include "../inc/tcpServer.hpp"
 
-MemoServer::MemoServer()
+MemoServer::MemoServer(const u_short port)
+: _port(port)
 {
-}
-
-MemoServer::~MemoServer()
-{
-    close(clitSock);
-    close(servSock);
-}
-
-void MemoServer::SetPort(unsigned short port)
-{
-        // OSへの手続き書類( sockaddr_in )の作成 : ローカルホストのアドレス
-    if ((this->servPort = port) == 0)
+    // OSへの手続き書類( sockaddr_in )の作成 : ローカルホストのアドレス
+    if ((_servPort = _port) == 0)
     {
         std::cerr << "Invalid port number." << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    if ((this->servSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 )
+    if ((_servSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 )
     {
         std::cerr << "socket() failed." << std::endl;
         exit(EXIT_FAILURE);
     }
-    memset(&this->servSockAddr, 0, sizeof(this->servSockAddr));
-    this->servSockAddr.sin_family      = AF_INET;
-    this->servSockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    this->servSockAddr.sin_port        = htons(this->servPort);
+    memset(&_servSockAddr, 0, sizeof(_servSockAddr));
+    _servSockAddr.sin_family      = AF_INET;
+    _servSockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    _servSockAddr.sin_port        = htons(_servPort);
 
     // ソケットとポート番号, アドレスを結びつける
-    if (bind(this->servSock, (struct sockaddr *) &this->servSockAddr, sizeof(this->servSockAddr) ) < 0 )
+    if (bind(_servSock, (struct sockaddr *) &_servSockAddr, sizeof(_servSockAddr) ) < 0 )
     {
         std::cerr << "bind() failed." << std::endl;
         exit(EXIT_FAILURE);
     }
 
     // ソケットを接続待ち状態にする
-    if (listen(this->servSock, QUEUELIMIT) < 0)
+    if (listen(_servSock, QUEUELIMIT) < 0)
     {
         std::cerr << "listen() failed." << std::endl;
         exit(EXIT_FAILURE);
     }
 
     /* ----- */
-    this->clitLen = sizeof(this->clitSockAddr);
+    _clitLen = sizeof(_clitSockAddr);
 
     // acceptはプログラムを停止してしまう.
-    if ((this->clitSock = accept(this->servSock, (struct sockaddr *) &this->clitSockAddr, &this->clitLen)) < 0)
+    if ((_clitSock = accept(_servSock, (struct sockaddr *) &_clitSockAddr, &_clitLen)) < 0)
     {
         std::cerr << "accept() failed." <<std::endl;
         exit(EXIT_FAILURE);
     }
-    printf("connected from %s.\n", inet_ntoa(clitSockAddr.sin_addr));
+    printf("connected from %s.\n", inet_ntoa(_clitSockAddr.sin_addr));
 
+    _recvBuffer = new char[BUFSIZE];
+    _sendBuffer = new char[BUFSIZE];
 }
 
-void MemoServer::Read()
+MemoServer::~MemoServer()
 {
-    memset(&this->recvBuffer, 0, sizeof(this->recvBuffer));
-    if ((recvMsgSize = recv(clitSock, recvBuffer, BUFSIZE, 0)) < 0)
-    {
-        perror("recv() failed.");
-        exit(EXIT_FAILURE);
-    }
-    else if(recvMsgSize == 0)
-    {
-        fprintf(stderr, "connection closed by foreign host.\n");
-    }
+    close(_clitSock);
+    close(_servSock);
+
+    delete[] _recvBuffer;
+    delete[] _sendBuffer;
 }
 
-void MemoServer::Send(const char text[5])
+void MemoServer::Send(c_char* text)
 {
-    char sendBuffer[BUFSIZE]={};          // send temporary buffer
-    strcpy(sendBuffer, text);
-    // std::cerr << "sendBuffer = " << sendBuffer << std::endl;
-    if (send(clitSock, sendBuffer, strlen(sendBuffer), 0) <= 0)
+    strcpy(_sendBuffer, text);
+    if (send(_clitSock, _sendBuffer, strlen(_sendBuffer), 0) <= 0)
     {
         std::cerr << "send() failed." << std::endl;
         exit(EXIT_FAILURE);
     }
 }
 
-char* MemoServer::OfRecvBuffer()
+char* MemoServer::Recv(void)
 {
-    return this->recvBuffer;
+    if ((_recvMsgSize = recv(_clitSock, _recvBuffer, BUFSIZE, 0)) < 0)
+    {
+        perror("recv() failed.");
+        exit(EXIT_FAILURE);
+    } 
+    else if(_recvMsgSize == 0)
+    {
+        fprintf(stderr, "connection closed by foreign host.\n");
+    }
+    return _recvBuffer;
 }
+
