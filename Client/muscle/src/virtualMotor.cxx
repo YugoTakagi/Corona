@@ -1,6 +1,7 @@
 #include "../inc/virtualMotor.hpp"
 
-VirtualMotor::VirtualMotor(/* args */)
+VirtualMotor::VirtualMotor(int num)
+: _num(num)
 {
 }
 
