@@ -1,6 +1,6 @@
 #include "../inc/tcpClient.hpp"
 
-MemoClient::MemoClient(const u_short port, c_char* ip_addres)
+TcpClient::TcpClient(const u_short port, c_char* ip_addres)
 : _port(port)
 , _ip_addres(ip_addres)
 {
@@ -12,7 +12,7 @@ MemoClient::MemoClient(const u_short port, c_char* ip_addres)
     _sendBuffer = new char[BUFSIZE];
 }
 
-MemoClient::~MemoClient(void)
+TcpClient::~TcpClient(void)
 {
     close(_sock);
     // std::cout << "close _sock." << std::endl;
@@ -21,7 +21,7 @@ MemoClient::~MemoClient(void)
     delete[] _sendBuffer;
 }
 
-void MemoClient::WriteSockaddr_in(c_char* ip_addres)
+void TcpClient::WriteSockaddr_in(c_char* ip_addres)
 {// OSへの手続き書類( sockaddr_in )の作成 : 接続先ホストのアドレス
 
     memset(&_servSockAddr, 0, sizeof(_servSockAddr));
@@ -33,7 +33,7 @@ void MemoClient::WriteSockaddr_in(c_char* ip_addres)
     }
 }
 
-void MemoClient::WritePort(const u_short port)
+void TcpClient::WritePort(const u_short port)
 {// port番号を指定
     if ((_servPort = port) == 0)
     {
@@ -43,7 +43,7 @@ void MemoClient::WritePort(const u_short port)
     _servSockAddr.sin_port = htons(_servPort);
 }
 
-void MemoClient::MakeSocket(void)
+void TcpClient::MakeSocket(void)
 {// ソケットの作成
     if ((_sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 )
     {
@@ -52,7 +52,7 @@ void MemoClient::MakeSocket(void)
     }
 }
 
-void MemoClient::Connect(void)
+void TcpClient::Connect(void)
 {// 2つのソケットをコネクト
     if (connect(_sock, (struct sockaddr*) &_servSockAddr, sizeof(_servSockAddr)) < 0) 
     {
@@ -62,7 +62,7 @@ void MemoClient::Connect(void)
     std::cout << "connect to " << inet_ntoa(_servSockAddr.sin_addr) << std::endl;
 }
 
-void MemoClient::Send(c_char* text)
+void TcpClient::Send(c_char* text)
 {
     strcpy(_sendBuffer, text);
     if (send(_sock, _sendBuffer, strlen(_sendBuffer), 0) <= 0)
@@ -72,7 +72,7 @@ void MemoClient::Send(c_char* text)
     }
 }
 
-char* MemoClient::Recv(void)
+char* TcpClient::Recv(void)
 {
     if ((_recvMsgSize = recv(_sock, _recvBuffer, sizeof(_recvBuffer), 0)) < 0)
     {

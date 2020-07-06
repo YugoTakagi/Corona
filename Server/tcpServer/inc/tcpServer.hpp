@@ -12,7 +12,7 @@
 typedef const char     c_char;
 typedef unsigned short u_short;
 
-class MemoServer
+class TcpServer
 {
 private:
     const u_short       _port;
@@ -30,8 +30,8 @@ private:
     int                 _sendMsgSize;    // send buffer size
     
 public:
-    MemoServer(const u_short port);
-    ~MemoServer(void);
+    TcpServer(const u_short port);
+    ~TcpServer(void);
 
     void  Send(c_char* text);
     char* Recv(void);

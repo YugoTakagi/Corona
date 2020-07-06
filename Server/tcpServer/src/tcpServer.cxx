@@ -1,6 +1,6 @@
 #include "../inc/tcpServer.hpp"
 
-MemoServer::MemoServer(const u_short port)
+TcpServer::TcpServer(const u_short port)
 : _port(port)
 {
     // OSへの手続き書類( sockaddr_in )の作成 : ローカルホストのアドレス
@@ -49,7 +49,7 @@ MemoServer::MemoServer(const u_short port)
     _sendBuffer = new char[BUFSIZE];
 }
 
-MemoServer::~MemoServer()
+TcpServer::~TcpServer()
 {
     close(_clitSock);
     close(_servSock);
@@ -58,7 +58,7 @@ MemoServer::~MemoServer()
     delete[] _sendBuffer;
 }
 
-void MemoServer::Send(c_char* text)
+void TcpServer::Send(c_char* text)
 {
     strcpy(_sendBuffer, text);
     if (send(_clitSock, _sendBuffer, strlen(_sendBuffer), 0) <= 0)
@@ -68,7 +68,7 @@ void MemoServer::Send(c_char* text)
     }
 }
 
-char* MemoServer::Recv(void)
+char* TcpServer::Recv(void)
 {
     if ((_recvMsgSize = recv(_clitSock, _recvBuffer, BUFSIZE, 0)) < 0)
     {

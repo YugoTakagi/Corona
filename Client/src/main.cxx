@@ -5,7 +5,7 @@
 
 typedef const float c_float;
 
-bool CheckRecv(MemoClient& clie, const char* flag);
+bool CheckRecv(TcpClient& clie, const char* flag);
 
 int main(int argc, char const *argv[])
 {
@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
 
     unsigned short port = atoi(argv[1]); // 8100
     const char* addr = "127.0.0.1"; // localhost: 127.0.0.1
-    MemoClient client(port, addr);
+    TcpClient client(port, addr);
 
     Muscle vasInt(DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-bool CheckRecv(MemoClient& clie, const char* flag)
+bool CheckRecv(TcpClient& clie, const char* flag)
 {
     while(true)
     {
