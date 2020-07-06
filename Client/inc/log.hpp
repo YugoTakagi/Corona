@@ -20,7 +20,7 @@ public:
     Log(const int size);
     ~Log();
     void RecordPidGain(float* gain, size_t size);
-    void Record(int index, c_float force[3]);
+    void Record(int index, c_float* force);
     void Save(const char* filepath);
 };
 

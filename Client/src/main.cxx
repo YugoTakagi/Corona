@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 /* ============================================================== */
 // Init
     c_float ref_table[] = {
-        #include IFILE1
+        #include INPUT_FILE_A
     };
     const int size = sizeof(ref_table) / sizeof(const float);
 
@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
     float gainBuffer[3] = {};
     vasInt.GetGain(gainBuffer, sizeof(gainBuffer));
     LogOfvasInt.RecordPidGain(gainBuffer, sizeof(gainBuffer));
-    LogOfvasInt.Save(OFILE1);
+    LogOfvasInt.Save(OUTPUT_FILE_A);
 // ~Save log
 /* ============================================================== */
     std::cout << "[Client] That's it. See you." << std::endl;
