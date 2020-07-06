@@ -1,0 +1,12 @@
+
+Server/build/
+
+.vscode/
+
+Client/build/
+
+Client/muscle/build/
+
+Client/_output/
+
+Client/tcpClient/build/

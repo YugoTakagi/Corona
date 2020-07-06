@@ -5,8 +5,10 @@ Corona is **motorSistem for 下腿人工関節シミュレータ**.
 
 
 - Client as 通信を持ちかけるライブラリ
-
 - Server as 通信を待っているライブラリ
+- TsvToCsv as OpenSimから目標値を取り出すライブラリ
+
+
 
 
 
@@ -37,6 +39,14 @@ xxxxxxxxxx [yn]? #yを入力してEnter
 ```
 
 で, buildフォルダの中身を全部消してから, もう一度実行方法を行う😌
+
+
+
+### > sub directory muscle
+
+muscle は**筋をイメージしたオブジェクト**. muscle class の為のヘッダーファイルが増えたので sub directory纏めた.
+
+muscle は目標値( 筋張力[N] )に追従するように, motorを制御する. 
 
 
 

@@ -27,7 +27,7 @@ void Log::RecordPidGain(float* gain, size_t size)
     _pidGain[2] = gain[2];
 }
 
-void Log::Record(int index, c_float force[3])
+void Log::Record(int index, c_float* force)
 {
     _referencedForce[index] = force[0];
     _measuredForce[index] = force[1];

@@ -1,42 +1,38 @@
-#include "../inc/log.hpp"
-#include "../inc/tcpClient.hpp"
 #include <muscle.hpp>
-
+#include <tcpClient.hpp>
+#include "../inc/log.hpp"
 #include "../inc/define.hpp"
 
 typedef const float c_float;
 
-bool Check(MemoClient& clie, const char* flag);
+bool CheckRecv(MemoClient& clie, const char* flag);
 
 int main(int argc, char const *argv[])
 {
 /* ============================================================== */
 // Init
     c_float ref_table[] = {
-        #include IFILE1
+        #include INPUT_FILE_A
     };
     const int size = sizeof(ref_table) / sizeof(const float);
+
+    unsigned short port = atoi(argv[1]); // 8100
+    const char* addr = "127.0.0.1"; // localhost: 127.0.0.1
+    MemoClient client(port, addr);
 
     Muscle vasInt(DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
 // ~Inti
 /* ============================================================== */
 // Get permission from Server
-    unsigned short port = atoi(argv[1]); // 8100
-    const char* addr = "127.0.0.1"; // localhost: 127.0.0.1
-    MemoClient client(port, addr);
-
     bool startFlag = false;
-
     std::cout << "[Client] I'm ready!" << std::endl;
     client.Send(READY);
-    if(Check(client, START)) startFlag = true;
+    if(CheckRecv(client, START)) startFlag = true;
 // ~Get permission from Server
 /* ============================================================== */
 // Start muscle control
-    float reff  = 0.0;
-    float mesf  = 0.0;
-    int   index = 0;
+    int index = 0;
     while(startFlag)
     {
         if(index == size) break;
@@ -55,21 +51,21 @@ int main(int argc, char const *argv[])
         ++index;
     }
     client.Send(END);
-    Check(client, END);
+    CheckRecv(client, END);
 // ~Start muscle control
 /* ============================================================== */
 // Save log
     float gainBuffer[3] = {};
     vasInt.GetGain(gainBuffer, sizeof(gainBuffer));
     LogOfvasInt.RecordPidGain(gainBuffer, sizeof(gainBuffer));
-    LogOfvasInt.Save(OFILE1);
+    LogOfvasInt.Save(OUTPUT_FILE_A);
 // ~Save log
 /* ============================================================== */
     std::cout << "[Client] That's it. See you." << std::endl;
     return 0;
 }
 
-bool Check(MemoClient& clie, const char* flag)
+bool CheckRecv(MemoClient& clie, const char* flag)
 {
     while(true)
     {
