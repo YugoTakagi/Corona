@@ -1,4 +1,4 @@
-#include "../inc/tcpServer.hpp"
+#include <tcpServer.hpp>
 
 #define START "start"
 #define END   "end.."
