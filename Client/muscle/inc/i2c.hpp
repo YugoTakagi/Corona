@@ -1,5 +1,5 @@
-#ifndef I2C
-#define I2C
+#ifndef _I2C_
+#define _I2C_
 
 class I2c
 {
@@ -9,4 +9,4 @@ public:
     I2c(/* args */);
     ~I2c();
 };
-#endif//I2C
+#endif //_I2C_
