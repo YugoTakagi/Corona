@@ -1,5 +1,5 @@
-#ifndef MUSCLE
-#define MUSCLE
+#ifndef _MUSCLE_
+#define _MUSCLE_
 
 #include "pid.hpp"
 #include "virtualMotor.hpp"
@@ -47,4 +47,4 @@ public:
     void   GetGain(float *buff, size_t size) const;
 };
 
-#endif//MUSCLE
+#endif //_MUSCLE_

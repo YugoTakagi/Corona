@@ -1,5 +1,5 @@
-#ifndef DEFINE
-#define DEFINE
+#ifndef _DEFINE_
+#define _DEFINE_
 /* ============================================================== */
 // [Import] file path
 
@@ -28,4 +28,4 @@
 #define DGAIN           1
 
 /* ============================================================== */
-#endif//DEFINE
+#endif //_DEFINE_

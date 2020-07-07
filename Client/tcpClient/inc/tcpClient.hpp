@@ -1,3 +1,6 @@
+#ifndef _TCPCLIENT_
+#define _TCPCLIENT_
+
 #include <stdio.h> //printf(), fprintf(), perror()
 #include <sys/socket.h> //socket(), bind(), accept(), listen()
 #include <arpa/inet.h> // struct sockaddr_in, struct sockaddr, inet_ntoa(), inet_aton()
@@ -38,3 +41,4 @@ public:
     void  Send(c_char* text);
     char* Recv(void);
 };
+#endif //_TCPCLIENT_

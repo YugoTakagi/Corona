@@ -1,5 +1,5 @@
-#ifndef VIRTUALMOTOR
-#define VIRTUALMOTOR
+#ifndef _VIRTUALMOTOR_
+#define _VIRTUALMOTOR_
 
 #include "../inc/i2c.hpp"
 #include <iostream>
@@ -18,4 +18,4 @@ public:
     bool SetVelocity(float velocity);
     bool SetDuty(int duty);
 };
-#endif//VIRTUALMOTOR
+#endif //_VIRTUALMOTOR_

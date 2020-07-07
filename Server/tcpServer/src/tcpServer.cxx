@@ -61,7 +61,7 @@ TcpServer::~TcpServer()
 void TcpServer::Send(c_char* text)
 {
     strcpy(_sendBuffer, text);
-    if (send(_clitSock, _sendBuffer, strlen(_sendBuffer), 0) <= 0)
+    if (send(_clitSock, _sendBuffer, BUFSIZE, 0) <= 0)
     {
         std::cerr << "send() failed." << std::endl;
         exit(EXIT_FAILURE);
