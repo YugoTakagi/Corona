@@ -1,35 +1,37 @@
-#include <Wire.h>
 // https://qiita.com/iigura/items/034ef2fcf12bdb57fd63
+// https://qiita.com/UT-HACKs/items/540e9dddcd1d2d8b2be2
 
-const int I2C_SLAVE_ADDRESS = 0x04;
+#include <Wire.h>
+
+#define ADDR 0x04
+#define PIN  13
 
 void setup(void)
 {
-  Serial.begin(9600);  // Arduino IDE にあるシリアルモニタのデフォルト通信速度
-
-  // I2C Inti
-  Wire.begin(I2C_SLAVE_ADDRESS);
-  Wire.onReceive(onRecv);
-
-  Serial.print("STARTUP -- OUT\n");  // 正常に setup できたことを通知
+  Wire.begin(ADDR); //アドレスを8に設定
+  pinMode(PIN,OUTPUT);
+  Wire.onReceive(receiveEvent); // register event
+//  Wire.onReceive(myReadLine); //割り込み関数の指定
 }
 
 void loop(void)
 {
-  // empty
+  //ここでは何もしない。
+  delay(100);
 }
 
-static char gBuf[255];
-
-void onRecv(int inNumOfRecvBytes)
+void receiveEvent(int howMany)
 {
-  sprintf(gBuf,"NumOfBytes=%d : ",inNumOfRecvBytes);
-  Serial.print(gBuf);
-
-  while(Wire.available()>0) {
-    unsigned char c=Wire.read();
-    sprintf(gBuf,"%02X ",c);  // Serial には printf がないので、一度文字列に出力する
-    Serial.print(gBuf);
+  int c;
+  if(Wire.available()) c = (int)Wire.read();
+  if(c==1)
+  {
+    digitalWrite(13,HIGH);
+//    Serial.println("HIGH"); // print the integer
   }
-  Serial.print("\n");
+  else if(c==0)
+  {
+    digitalWrite(13,LOW);
+//    Serial.println("LOW"); // print the integer
+  }
 }
