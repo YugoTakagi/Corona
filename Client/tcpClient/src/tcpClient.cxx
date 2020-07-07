@@ -74,7 +74,7 @@ void TcpClient::Send(c_char* text)
 
 char* TcpClient::Recv(void)
 {
-    if ((_recvMsgSize = recv(_sock, _recvBuffer, sizeof(_recvBuffer), 0)) < 0)
+    if ((_recvMsgSize = recv(_sock, _recvBuffer, BUFSIZE, 0)) < 0)
     {
         perror("recv() failed.");
         exit(EXIT_FAILURE);
