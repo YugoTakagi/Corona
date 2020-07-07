@@ -22,7 +22,7 @@ int main(int argc, char* const *argv)
     const char* addr = argv[2]; // localhost: 127.0.0.1
     TcpClient client(port, addr);
 
-    Muscle vasInt(1, DT, PGAIN, IGAIN, DGAIN);
+    Muscle vasInt(0x04, 13, DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
 // ~Inti
 /* ============================================================== */

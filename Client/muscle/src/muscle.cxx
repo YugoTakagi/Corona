@@ -1,8 +1,8 @@
 #include "../inc/muscle.hpp"
 
-Muscle::Muscle(int num, c_float dt, c_float pGain, c_float iGain, c_float dGain)
+Muscle::Muscle(int addr, int pin, c_float dt, c_float pGain, c_float iGain, c_float dGain)
 :_pid(dt, pGain, iGain, dGain)
-,_motor(num)
+,_motor(addr, pin)
 ,_pGain(pGain)
 ,_iGain(iGain)
 ,_dGain(dGain)

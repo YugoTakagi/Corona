@@ -3,6 +3,8 @@ project(XXX CXX)
 set(OUT "main")
 set(INCLUDE "inc")
 
+set(CMAKE_CXX_FLAGS "-Wall -I/usr/local/include -L/usr/local/lib -lwiringPi")
+
 include_directories(${INCLUDE})
 file(GLOB SOURCE_FILES "src/*.cxx" "src/*.cpp" "src/*.c")
 set(SOURCE ${SOURCE_FILES})

@@ -36,7 +36,7 @@ private:
 public:
     Muscle
     (
-        int num, 
+        int addr, int pin, 
         c_float dt, 
         c_float pGain, c_float iGain, c_float dGain
     );
