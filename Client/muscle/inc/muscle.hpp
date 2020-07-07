@@ -34,7 +34,12 @@ private:
     float*       _force;
     float        _measuredForce;
 public:
-    Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain);
+    Muscle
+    (
+        int num, 
+        c_float dt, 
+        c_float pGain, c_float iGain, c_float dGain
+    );
     ~Muscle();
 
     float* Stretch(c_float &ref);

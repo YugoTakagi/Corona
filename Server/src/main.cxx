@@ -4,7 +4,7 @@
 #define END   "end.."
 #define READY "ready"
 
-bool Check(MemoServer& serv, const char* flag);
+bool CheckRecv(TcpServer& serv, const char* flag);
 int main(void)
 {
     std::cout << "[Server] Hi! Let's start!" << std::endl;
@@ -12,19 +12,16 @@ int main(void)
     // unsigned short port[] = {8100, 8200};
     // int size = sizeof(port) / sizeof(unsigned short);
 
-    MemoServer serv1;
-    // MemoServer serv2;
+    TcpServer serv1(port[0]);
+    // TcpServer serv2;
 
-    serv1.SetPort(port[0]);
-    // serv2.SetPort(port[1]);
-
-    Check(serv1, READY);
+    CheckRecv(serv1, READY);
     // Check(serv2, READY);
 
     serv1.Send(START);
     // serv2.Send(START);
 
-    if(Check(serv1, END)) serv1.Send(END);
+    if(CheckRecv(serv1, END)) serv1.Send(END);
     // if(Check(serv2, END)) serv2.Send(END);
 
     std::cout << "[Server] That's it." << std::endl;
@@ -32,12 +29,12 @@ int main(void)
     return 0;
 }
 
-bool Check(MemoServer& serv, const char* flag)
+bool CheckRecv(TcpServer& serv, const char* flag)
 {
     while(true)
     {// Recv ReadFlag from Client.
-        serv.Read();
-        char* recvBuffer = serv.OfRecvBuffer();
+        
+        char* recvBuffer = serv.Recv();
         // std::cout << "[Server] Recv ["<< recvBuffer <<"] from Client."<< std::endl;
         if(!strcmp(recvBuffer, flag))
         {

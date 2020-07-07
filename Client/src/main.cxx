@@ -5,10 +5,12 @@
 
 typedef const float c_float;
 
-bool CheckRecv(MemoClient& clie, const char* flag);
+bool CheckRecv(TcpClient& clie, const char* flag);
+void SetOption(const int argc, char* const *data);
 
-int main(int argc, char const *argv[])
+int main(int argc, char* const *argv)
 {
+    SetOption(argc, argv);
 /* ============================================================== */
 // Init
     c_float ref_table[] = {
@@ -17,10 +19,10 @@ int main(int argc, char const *argv[])
     const int size = sizeof(ref_table) / sizeof(const float);
 
     unsigned short port = atoi(argv[1]); // 8100
-    const char* addr = "127.0.0.1"; // localhost: 127.0.0.1
-    MemoClient client(port, addr);
+    const char* addr = argv[2]; // localhost: 127.0.0.1
+    TcpClient client(port, addr);
 
-    Muscle vasInt(DT, PGAIN, IGAIN, DGAIN);
+    Muscle vasInt(1, DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
 // ~Inti
 /* ============================================================== */
@@ -65,7 +67,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-bool CheckRecv(MemoClient& clie, const char* flag)
+bool CheckRecv(TcpClient& clie, const char* flag)
 {
     while(true)
     {
@@ -78,4 +80,40 @@ bool CheckRecv(MemoClient& clie, const char* flag)
         }
     }
     return false;
+}
+
+
+void SetOption(const int argc, char* const *data)
+{
+
+	int opt = 0; //getopt()のエラーメッセージを無効にする。
+	while ((opt = getopt(argc, data, "hi:o:f:e:")) != -1)
+    {
+		switch (opt) {
+			case 'h': // ヘルプ
+				std::cout << "ex: ./main 8100 127.0.0.1" << std::endl;
+				exit(0);
+
+			// case 'i':	// 入力
+			// 	this->i_filename = std::string(optarg);
+			// 	break;
+
+			// case 'o':	// 出力
+			// 	this->o_filename = std::string(optarg);
+			// 	break;
+
+			// case 'f':	// 初期フレーム
+			// 	this->first_frame = atoi(optarg);
+			// 	break;
+
+			// case 'e':	// 最終フレーム
+			// 	this->end_frame = atoi(optarg);
+			// 	break;
+
+			default: //指定していないオプションが渡された場合
+				std::cout << "指定していないオプション" << std::endl;
+				// std::cout << "Usage: $ ./main [-h] [-i] arg1 [-o] arg2 [-f] arg3 [-e] arg4 ..." << std::endl;
+				exit(0);
+		}
+	}
 }

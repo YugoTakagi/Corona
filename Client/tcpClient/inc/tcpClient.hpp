@@ -12,7 +12,7 @@
 typedef const char     c_char;
 typedef unsigned short u_short;
 
-class MemoClient
+class TcpClient
 {
 private:
     const u_short       _port;
@@ -32,8 +32,8 @@ private:
     void MakeSocket(void);
     void Connect(void);
 public:
-    MemoClient(const u_short port, c_char* ip_addres);
-    ~MemoClient(void);
+    TcpClient(const u_short port, c_char* ip_addres);
+    ~TcpClient(void);
 
     void  Send(c_char* text);
     char* Recv(void);

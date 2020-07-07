@@ -7,28 +7,32 @@
 #include <iostream>
 
 #define QUEUELIMIT 5
-#define MSGSIZE 5
-#define BUFSIZE 5
+#define BUFSIZE    5
 
-class MemoServer
+typedef const char     c_char;
+typedef unsigned short u_short;
+
+class TcpServer
 {
 private:
-    int servSock;                      // server socket descriptor
-    int clitSock;                      // client socket descriptor
-    struct sockaddr_in servSockAddr;   // server internet socket address
-    struct sockaddr_in clitSockAddr;   // client internet socket address
-    unsigned short servPort;           // server port number
-    unsigned int clitLen;              // client internet socket address length
-    char recvBuffer[BUFSIZE];          // receive temporary buffer
-    // char sendBuffer[BUFSIZE];          // send temporary buffer
-    int recvMsgSize, sendMsgSize;      // recieve and send buffer size
+    const u_short       _port;
+    u_short             _servPort;       // server port number
+
+    int                 _servSock;       // server socket descriptor
+    int                 _clitSock;       // client socket descriptor
+    struct sockaddr_in  _servSockAddr;   // server internet socket address
+    struct sockaddr_in  _clitSockAddr;   // client internet socket address
+    
+    unsigned int        _clitLen;        // client internet socket address length
+    char*               _recvBuffer;     // receive temporary buffer
+    char*               _sendBuffer;     // send temporary buffer
+    int                 _recvMsgSize;    // recieve buffer size
+    int                 _sendMsgSize;    // send buffer size
     
 public:
-    MemoServer();
-    ~MemoServer();
+    TcpServer(const u_short port);
+    ~TcpServer(void);
 
-    void SetPort(unsigned short port);
-    void Read();
-    void Send(const char text[5]);
-    char* OfRecvBuffer();
+    void  Send(c_char* text);
+    char* Recv(void);
 };

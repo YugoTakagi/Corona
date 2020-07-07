@@ -10,8 +10,9 @@
 class VirtualMotor
 {
 private:
+    int _num;
 public:
-    VirtualMotor(/* args */);
+    VirtualMotor(int num);
     ~VirtualMotor();
 
     bool SetVelocity(float velocity);

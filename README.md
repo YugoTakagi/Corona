@@ -18,7 +18,7 @@ Client はRaspberry Piで実行するプログラム.
 
 
 
- ==※ Serverを実行してから==
+ ==**※ Serverを実行してから**==
 
 ```bash
 #実行方法
@@ -50,6 +50,12 @@ muscle は目標値( 筋張力[N] )に追従するように, motorを制御す�
 
 
 
+### >sub directory tcpClient
+
+tcpClient は, **TCP/IP通信のクライアントをイメージしたオブジェクト**. 
+
+
+
 
 
 ## How to use Server
@@ -66,4 +72,10 @@ $ cmake ..
 $ cmake --build .
 $ ./main
 ```
+
+
+
+### >sub directory tcpServer
+
+tcpServer は, **TCP/IP通信のサーバをイメージしたオブジェクト**. 
 

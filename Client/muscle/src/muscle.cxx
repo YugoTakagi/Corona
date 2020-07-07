@@ -1,12 +1,12 @@
 #include "../inc/muscle.hpp"
 
-Muscle::Muscle(c_float dt, c_float pGain, c_float iGain, c_float dGain)
-:_pid(dt)
+Muscle::Muscle(int num, c_float dt, c_float pGain, c_float iGain, c_float dGain)
+:_pid(dt, pGain, iGain, dGain)
+,_motor(num)
 ,_pGain(pGain)
 ,_iGain(iGain)
 ,_dGain(dGain)
 {
-    _pid.SetGain(pGain, iGain, dGain);
     _force = new float[3];
 }
 
