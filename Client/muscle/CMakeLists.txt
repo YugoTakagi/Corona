@@ -4,7 +4,7 @@ project(muscle_lib
     DESCRIPTION "muscle lib"
     LANGUAGES CXX)
 
-#set(INCLUDE "./inc")
+set(CMAKE_CXX_FLAGS "-Wall -I/usr/local/include -L/usr/local/lib -lwiringPi")
 
 file(GLOB SOURCE_FILES "src/*.cxx" "src/*.cpp" "src/*.c")
 set(SOURCE ${SOURCE_FILES})

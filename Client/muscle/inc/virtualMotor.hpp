@@ -10,9 +10,9 @@
 class VirtualMotor
 {
 private:
-    int _num;
+    I2c _i2c;
 public:
-    VirtualMotor(int num);
+    VirtualMotor(const int addr, const int pin);
     ~VirtualMotor();
 
     bool SetVelocity(float velocity);

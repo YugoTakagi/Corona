@@ -1,7 +1,7 @@
 #include "../inc/virtualMotor.hpp"
 
-VirtualMotor::VirtualMotor(int num)
-: _num(num)
+VirtualMotor::VirtualMotor(const int addr, const int pin)
+:_i2c(addr, pin)
 {
 }
 
