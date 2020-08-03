@@ -19,3 +19,8 @@ void I2c::Write(const int num)
 {
     wiringPiI2CWrite(_fd, num);
 }
+
+void I2c::Read()
+{
+    
+}

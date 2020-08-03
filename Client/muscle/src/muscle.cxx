@@ -30,7 +30,7 @@ float Muscle::MeasureForce()
 {
     _measuredForce = 0.0;
     // run code
-
+    _i2c.Write()
 
     // ~run code
     return _measuredForce;

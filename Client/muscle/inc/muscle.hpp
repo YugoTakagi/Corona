@@ -2,6 +2,7 @@
 #define _MUSCLE_
 
 #include "pid.hpp"
+#include "i2c.hpp"
 #include "virtualMotor.hpp"
 
 typedef const float c_float;
@@ -26,6 +27,7 @@ class Muscle
 private:
     PidControler _pid;
     VirtualMotor _motor;
+    I2c _i2c;
 
     c_float      _pGain;
     c_float      _iGain;
