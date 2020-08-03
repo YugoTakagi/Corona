@@ -4,45 +4,46 @@
 #include <Wire.h>
 
 #define ADDR 0x04
-#define PIN  13
+#define Register 1
 
 int potpin = 0; 
 int val = 0;
 
 void setup(void)
 {
+  Serial.begin(19200);
+  
   Wire.begin(ADDR); //アドレスを8に設定
 //  pinMode(PIN,OUTPUT);
-//  Wire.onReceive(receiveEvent); // register event
+  Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
-//  Wire.onReceive(myReadLine); //割り込み関数の指定
 }
 
 void loop(void)
 {
-  //ここでは何もしない。
-  delay(100);
+  //ここでは何もしない
 }
-
-void receiveEvent(int howMany)
+int ind = 0;
+int data[2] = {0};
+void receiveEvent(int inNumOfRecvBytes)
 {
-  int c;
-  if(Wire.available()) c = (int)Wire.read();
-  if(c==1)
+//  data[0] = 0;
+//  data[1] = 0;
+  while(Wire.available())
   {
-    digitalWrite(13,HIGH);
-//    Serial.println("HIGH"); // print the integer
+    data[ind] = Wire.read();
+    ind++;
   }
-  else if(c==0)
+  if(ind > 1)
   {
-    digitalWrite(13,LOW);
-//    Serial.println("LOW"); // print the integer
+    Serial.print(data[0]); Serial.print(",");
+    Serial.println(data[1]); // print the integer
+    ind = 0;
   }
 }
 
 void requestEvent()
 {
-  delay(50);
   val =  analogRead(potpin);
 //  Serial.println(val);
   byte data[2];
@@ -50,5 +51,4 @@ void requestEvent()
   data[1] = byte(val>>8);
   
   Wire.write(data, 2);
-//  Wire.write(122);
 }
