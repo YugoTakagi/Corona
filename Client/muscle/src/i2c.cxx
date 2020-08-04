@@ -31,13 +31,14 @@ void I2c::Write(const int val)
     }
 }
 
-void I2c::Read()
+int I2c::Read()
 {
     // printf("read : %d\n", wiringPiI2CReadReg16(fd, 22));
     // printf("read : %d\n", wiringPiI2CRead(fd));
 
     // できた理由が分からない
     int temp[2] = {0};
-    read(_fd, temp, 2);
+    int f = read(_fd, temp, 2);
     printf("read : %d\n", temp[0]);
+    return f;
 }

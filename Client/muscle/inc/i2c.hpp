@@ -21,6 +21,6 @@ public:
     ~I2c();
 
     void Write(const int num);
-    void Read();
+    int Read();
 };
 #endif //_I2C_
