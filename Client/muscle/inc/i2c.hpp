@@ -7,6 +7,8 @@
 #include <string.h>
 #include <errno.h>
 
+#include <unistd.h>
+
 class I2c
 {
 private:
