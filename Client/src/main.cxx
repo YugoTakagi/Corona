@@ -48,7 +48,7 @@ int main(int argc, char* const *argv)
             index,
             vasInt.Stretch(ref_table[index])
         );
-
+        usleep(20000); // 20ms
 
     // ~main loop
         ++index;
