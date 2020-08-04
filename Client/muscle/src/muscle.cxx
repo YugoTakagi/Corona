@@ -2,7 +2,8 @@
 
 Muscle::Muscle(int addr, int pin, c_float dt, c_float pGain, c_float iGain, c_float dGain)
 :_pid(dt, pGain, iGain, dGain)
-,_motor(addr, pin)
+,_i2c(addr, pin)
+,_motor(pin)
 ,_pGain(pGain)
 ,_iGain(iGain)
 ,_dGain(dGain)
