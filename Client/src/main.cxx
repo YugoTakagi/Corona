@@ -35,7 +35,8 @@ int main(int argc, char* const *argv)
 /* ============================================================== */
 // Start muscle control
     int index = 0;
-    while(startFlag)
+    // while(startFlag)
+    while(true)
     {
         if(index == size) break;
     // main loop
@@ -52,8 +53,8 @@ int main(int argc, char* const *argv)
     // ~main loop
         ++index;
     }
-    client.Send(END);
-    CheckRecv(client, END);
+    // client.Send(END);
+    // CheckRecv(client, END);
 // ~Start muscle control
 /* ============================================================== */
 // Save log
