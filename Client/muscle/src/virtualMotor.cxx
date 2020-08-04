@@ -1,7 +1,7 @@
 #include "../inc/virtualMotor.hpp"
 
-VirtualMotor::VirtualMotor(const int addr, const int pin)
-:_i2c(addr, pin)
+VirtualMotor::VirtualMotor(const int pin)
+:_pin(pin)
 {
 }
 
@@ -9,7 +9,7 @@ VirtualMotor::~VirtualMotor()
 {
 }
 
-bool VirtualMotor::SetVelocity(float velocity)
+bool VirtualMotor::SetVelocity(I2c &i2c, float velocity)
 {
     if (velocity < VELOCITY_MIN || VELOCITY_MAX < velocity)
     {

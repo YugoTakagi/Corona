@@ -22,7 +22,7 @@ float* Muscle::Stretch(c_float &ref)
 
     _force[ASCAL] = _pid.run(_force[ASREF], _force[ASMES]);
 
-    _motor.SetVelocity(_force[ASCAL]);
+    _motor.SetVelocity(_i2c, _force[ASCAL]);
     return _force;
 }
 
@@ -30,7 +30,7 @@ float Muscle::MeasureForce()
 {
     _measuredForce = 0.0;
     // run code
-    _i2c.Write()
+    _i2c.Read();
 
     // ~run code
     return _measuredForce;
