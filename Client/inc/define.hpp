@@ -25,7 +25,7 @@
 // for pid
 
 #define DT              0.02//[s]
-#define PGAIN           2
+#define PGAIN           1.1
 #define IGAIN           0.01
 #define DGAIN           0
 
