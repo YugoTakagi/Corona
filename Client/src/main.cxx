@@ -18,19 +18,19 @@ int main(int argc, char* const *argv)
     };
     const int size = sizeof(ref_table) / sizeof(const float);
 
-    unsigned short port = atoi(argv[1]); // 8100
-    const char* addr = argv[2]; // localhost: 127.0.0.1
-    TcpClient client(port, addr);
+    // unsigned short port = atoi(argv[1]); // 8100
+    // const char* addr = argv[2]; // localhost: 127.0.0.1
+    // TcpClient client(port, addr);
 
     Muscle vasInt(0x04, 13, DT, PGAIN, IGAIN, DGAIN);
     Log LogOfvasInt(size);
 // ~Inti
 /* ============================================================== */
 // Get permission from Server
-    bool startFlag = false;
-    std::cout << "[Client] I'm ready!" << std::endl;
-    client.Send(READY);
-    if(CheckRecv(client, START)) startFlag = true;
+    // bool startFlag = false;
+    // std::cout << "[Client] I'm ready!" << std::endl;
+    // client.Send(READY);
+    // if(CheckRecv(client, START)) startFlag = true;
 // ~Get permission from Server
 /* ============================================================== */
 // Start muscle control
