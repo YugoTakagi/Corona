@@ -22,6 +22,7 @@ float* Muscle::Stretch(c_float &ref)
     _force[ASMES] = MeasureForce();
 
     _force[ASCAL] = _pid.run(_force[ASREF], _force[ASMES]);
+    std::cout << "pid: " << _force[ASCAL] << std::endl;
 
     _motor.SetVelocity(_i2c, _force[ASCAL]);
     return _force;

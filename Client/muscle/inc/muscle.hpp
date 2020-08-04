@@ -7,9 +7,9 @@
 
 typedef const float c_float;
 
-#define P 0
-#define I 1
-#define D 2
+#define P 1
+#define I 0.01
+#define D 0
 
 #define ASREF 0 // as reference
 #define ASMES 1 // as measured
