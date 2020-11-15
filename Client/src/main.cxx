@@ -1,6 +1,6 @@
 #include <muscle.hpp>
 #include <tcpClient.hpp>
-#include "../inc/log.hpp"
+// #include "../inc/log.hpp"
 #include "../inc/define.hpp"
 
 typedef const float c_float;
@@ -10,7 +10,7 @@ void SetOption(const int argc, char* const *data);
 
 int main(int argc, char* const *argv)
 {
-    SetOption(argc, argv);
+    // SetOption(argc, argv);
 /* ============================================================== */
 // Init
     c_float ref_table[] = {
@@ -23,7 +23,7 @@ int main(int argc, char* const *argv)
     // TcpClient client(port, addr);
 
     Muscle vasInt(0x04, 13, DT, PGAIN, IGAIN, DGAIN);
-    Log LogOfvasInt(size);
+    // Log LogOfvasInt(size);
 // ~Inti
 /* ============================================================== */
 // Get permission from Server
@@ -39,18 +39,31 @@ int main(int argc, char* const *argv)
     while(true)
     {
         if(index == size) break;
-    // main loop
+
+
+
+        // この中に処理を書きます.
+
 
 
         std::cout <<"["<< index <<"] ";
-        LogOfvasInt.Record
-        (
-            index,
-            vasInt.Stretch(ref_table[index])
-        );
-        usleep(20000); // 20ms
+        // LogOfvasInt.Record
+        // (
+        //     index,
+        //     vasInt.Stretch(ref_table[index])
+        // );
+        vasInt.Stretch(ref_table[index]);
 
-    // ~main loop
+
+        // std::cout <<"ref, " << ref_table[index] << std::endl;
+        // usleep(20000); // 20ms
+
+
+
+        // この中に処理を書きます.
+
+
+
         ++index;
     }
     // client.Send(END);
@@ -58,13 +71,13 @@ int main(int argc, char* const *argv)
 // ~Start muscle control
 /* ============================================================== */
 // Save log
-    float gainBuffer[3] = {};
-    vasInt.GetGain(gainBuffer, sizeof(gainBuffer));
-    LogOfvasInt.RecordPidGain(gainBuffer, sizeof(gainBuffer));
-    LogOfvasInt.Save(OUTPUT_FILE_A);
+    // float gainBuffer[3] = {};
+    // vasInt.GetGain(gainBuffer, sizeof(gainBuffer));
+    // LogOfvasInt.RecordPidGain(gainBuffer, sizeof(gainBuffer));
+    // LogOfvasInt.Save(OUTPUT_FILE_A);
 // ~Save log
 /* ============================================================== */
-    std::cout << "[Client] That's it. See you." << std::endl;
+    // std::cout << "[Client] That's it. See you." << std::endl;
     return 0;
 }
 

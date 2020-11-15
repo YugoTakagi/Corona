@@ -1,0 +1,9 @@
+/home/pi/xxx/Corona/Client/CMakeFiles/rebuild_cache.dir
+/home/pi/xxx/Corona/Client/CMakeFiles/main.dir
+/home/pi/xxx/Corona/Client/CMakeFiles/edit_cache.dir
+/home/pi/xxx/Corona/Client/muscle/CMakeFiles/rebuild_cache.dir
+/home/pi/xxx/Corona/Client/muscle/CMakeFiles/muscle.dir
+/home/pi/xxx/Corona/Client/muscle/CMakeFiles/edit_cache.dir
+/home/pi/xxx/Corona/Client/tcpClient/CMakeFiles/rebuild_cache.dir
+/home/pi/xxx/Corona/Client/tcpClient/CMakeFiles/tcpClient.dir
+/home/pi/xxx/Corona/Client/tcpClient/CMakeFiles/edit_cache.dir

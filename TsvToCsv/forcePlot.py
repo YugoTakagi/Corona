@@ -9,7 +9,7 @@ ALL = ["time", "glut_med1_r", "glut_med2_r", "glut_med3_r", "bifemlh_r", "bifems
 
 args = sys.argv
 IFILE = str(args[1])
-COL = str(args[2])
+# COL = str(args[2])
 
 # tsv = pd.read_table(IFILE, header=22, usecols=range(9))
 tsv = pd.read_table(IFILE, header=22, usecols=ALL)

@@ -18,9 +18,9 @@ import sys
 #          0.1, 0.3, 1.5,
 #          (0.0, 0.1), (0.45, 0.1)]
 
-H = ["time", "glut_med1_r", "glut_med2_r", "glut_med3_r", "bifemlh_r", "bifemsh_r", "sar_r", "add_mag2_r", "tfl_r", "pect_r", "grac_r", "glut_max1_r", "glut_max2_r", "glut_max3_r", "iliacus_r", "psoas_r", "quad_fem_r", "gem_r", "peri_r", "rect_fem_r", "vas_int_r", "med_gas_r", "soleus_r", "tib_post_r", "tib_ant_r"]
+# H = ["time", "glut_med1_r", "glut_med2_r", "glut_med3_r", "bifemlh_r", "bifemsh_r", "sar_r", "add_mag2_r", "tfl_r", "pect_r", "grac_r", "glut_max1_r", "glut_max2_r", "glut_max3_r", "iliacus_r", "psoas_r", "quad_fem_r", "gem_r", "peri_r", "rect_fem_r", "vas_int_r", "med_gas_r", "soleus_r", "tib_post_r", "tib_ant_r"]
 h = ["time", "glut_med2_r", "add_mag2_r", "glut_max2_r", "iliacus_r", "rect_fem_r", "vas_int_r", "med_gas_r", "tib_ant_r"]
-# H = ["time", "glut_med2_r", "add_mag2_r", "glut_max2_r", "iliacus_r", "rect_fem_r", "vas_int_r", "med_gas_r", "tib_ant_r"]
+H = ["time", "glut_med2_r", "add_mag2_r", "glut_max2_r", "iliacus_r", "rect_fem_r", "vas_int_r", "med_gas_r", "tib_ant_r"]
 
 # define the figure size and grid layout properties
 # figsize = (12, 5)

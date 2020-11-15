@@ -16,16 +16,15 @@ Muscle::~Muscle()
     delete[] _force;
 }
 
-float* Muscle::Stretch(c_float &ref)
+float Muscle::Stretch(c_float ref)
 {
-    _force[ASREF] = ref;
-    _force[ASMES] = MeasureForce();
-
-    _force[ASCAL] = _pid.run(_force[ASREF], _force[ASMES]);
-    std::cout << "pid: " << _force[ASCAL] << std::endl;
-
-    _motor.SetVelocity(_i2c, _force[ASCAL]);
-    return _force;
+    std::cout << "send: " << ref << std::endl;
+    _i2c.Write(ref);
+    // _i2c.Write(150.00000);
+    // std::cout << "send: " << 150.00000 << std::endl;
+    usleep(20000); // 20ms
+    std::cout << "read: " << _i2c.Read() << std::endl;
+    return ref;
 }
 
 float Muscle::MeasureForce()

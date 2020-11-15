@@ -44,9 +44,9 @@ public:
     );
     ~Muscle();
 
-    float* Stretch(c_float &ref);
-    float  MeasureForce();
-    void   GetGain(float *buff, size_t size) const;
+    float Stretch(c_float ref);
+    float MeasureForce();
+    void  GetGain(float *buff, size_t size) const;
 };
 
 #endif //_MUSCLE_

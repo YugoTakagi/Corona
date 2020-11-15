@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmuscle.a  CMakeFiles/muscle.dir/src/i2c.cxx.o CMakeFiles/muscle.dir/src/muscle.cxx.o CMakeFiles/muscle.dir/src/pid.cxx.o CMakeFiles/muscle.dir/src/virtualMotor.cxx.o CMakeFiles/muscle.dir/src/virtualServoMotor.cxx.o
+/usr/bin/ranlib libmuscle.a
